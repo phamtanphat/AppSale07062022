@@ -49,9 +49,9 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     // View Model
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.0-alpha01"
     // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata:2.6.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.6.0-alpha01"
 
     // Splash
     implementation 'com.airbnb.android:lottie:5.2.0'
