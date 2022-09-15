@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.appsale07062022.data.remote.ApiService;
 import com.example.appsale07062022.data.remote.RetrofitClient;
-import com.example.appsale07062022.data.remote.dto.AppResource;
+import com.example.appsale07062022.data.remote.dto.AppResponse;
 import com.example.appsale07062022.data.remote.dto.UserDTO;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class AuthenticationRepository {
         apiService = RetrofitClient.getInstance(context).getApiService();
     }
 
-    public Call<AppResource<UserDTO>> signIn(String email, String password) {
+    public Call<AppResponse<UserDTO>> signIn(String email, String password) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("email", email);
         map.put("password", password);

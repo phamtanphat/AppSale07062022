@@ -1,5 +1,8 @@
-package com.example.appsale07062022.data.remote.dto;
+package com.example.appsale07062022.data.model;
 
+/**
+ * Created by pphat on 9/15/2022.
+ */
 public class AppResource<T> {
     public T data;
     public String message;
