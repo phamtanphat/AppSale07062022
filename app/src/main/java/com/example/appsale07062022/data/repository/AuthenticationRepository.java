@@ -27,4 +27,14 @@ public class AuthenticationRepository {
         map.put("password", password);
         return apiService.signIn(map);
     }
+
+    public Call<AppResponse<UserDTO>> signUp(String email, String password, String name, String phone, String address) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("email", email);
+        map.put("password", password);
+        map.put("name", name);
+        map.put("phone", phone);
+        map.put("address", address);
+        return apiService.signUp(map);
+    }
 }

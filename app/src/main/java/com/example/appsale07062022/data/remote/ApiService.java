@@ -16,4 +16,7 @@ public interface ApiService {
 
     @POST("user/sign-in")
     Call<AppResponse<UserDTO>> signIn(@Body HashMap<String, Object> body);
+
+    @POST("user/sign-up")
+    Call<AppResponse<UserDTO>> signUp(@Body HashMap<String, Object> body);
 }
