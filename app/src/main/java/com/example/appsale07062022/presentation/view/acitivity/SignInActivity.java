@@ -6,7 +6,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,6 +19,7 @@ import com.example.appsale07062022.data.model.AppResource;
 import com.example.appsale07062022.data.model.User;
 import com.example.appsale07062022.databinding.ActivitySignInBinding;
 import com.example.appsale07062022.presentation.viewmodel.SignInViewModel;
+import com.example.appsale07062022.util.SpannedUtil;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -53,6 +58,16 @@ public class SignInActivity extends AppCompatActivity {
                 signInViewModel.signIn(email, password);
             }
         });
+
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        spannableStringBuilder.append("Don't have an account?");
+        spannableStringBuilder.append(SpannedUtil.setClickColorLink("Register", this, () -> {
+            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+            overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
+        }));
+        binding.textViewRegister.setText(spannableStringBuilder);
+        binding.textViewRegister.setHighlightColor(Color.TRANSPARENT);
+        binding.textViewRegister.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void observerData() {
