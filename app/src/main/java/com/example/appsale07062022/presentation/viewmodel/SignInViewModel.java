@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.appsale07062022.common.AppConstant;
+import com.example.appsale07062022.data.local.AppCache;
 import com.example.appsale07062022.data.model.AppResource;
 import com.example.appsale07062022.data.model.User;
 import com.example.appsale07062022.data.remote.dto.AppResponse;
@@ -27,6 +29,7 @@ import retrofit2.Response;
 public class SignInViewModel extends ViewModel {
     private final MutableLiveData<AppResource<User>> resourceUser = new MutableLiveData<>();
     private AuthenticationRepository repository;
+    private Context context;
 
     public SignInViewModel(Context context) {
         repository = new AuthenticationRepository(context);
@@ -45,6 +48,7 @@ public class SignInViewModel extends ViewModel {
                         if (response.isSuccessful()) {
                             AppResponse<UserDTO> responseUser = response.body();
                             UserDTO userDTO = responseUser.data;
+                            AppCache.getInstance(context).setValue(AppConstant.TOKEN_KEY, userDTO.getToken());
                             resourceUser.setValue(
                                     new AppResource.Success<>(
                                             new User(
