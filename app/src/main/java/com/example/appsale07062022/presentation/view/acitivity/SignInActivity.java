@@ -77,6 +77,10 @@ public class SignInActivity extends AppCompatActivity {
                 switch (userAppResource.status) {
                     case SUCCESS:
                         Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
                         setLoading(false);
                         break;
                     case LOADING:

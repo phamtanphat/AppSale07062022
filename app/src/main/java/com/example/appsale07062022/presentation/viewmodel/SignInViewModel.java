@@ -48,7 +48,7 @@ public class SignInViewModel extends ViewModel {
                         if (response.isSuccessful()) {
                             AppResponse<UserDTO> responseUser = response.body();
                             UserDTO userDTO = responseUser.data;
-                            AppCache.getInstance(context).setValue(AppConstant.TOKEN_KEY, userDTO.getToken());
+                            AppCache.getInstance(context).setValue(AppConstant.TOKEN_KEY, userDTO.getToken()).commit();
                             resourceUser.setValue(
                                     new AppResource.Success<>(
                                             new User(
