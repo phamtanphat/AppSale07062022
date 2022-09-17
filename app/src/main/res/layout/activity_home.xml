@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.acitivity.HomeActivity">
 
+    <include
+        android:visibility="gone"
+        layout="@layout/layout_loading"
+        android:id="@+id/layout_loading"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

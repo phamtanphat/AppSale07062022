@@ -32,6 +32,7 @@ public class SignInViewModel extends ViewModel {
     private Context context;
 
     public SignInViewModel(Context context) {
+        this.context = context;
         repository = new AuthenticationRepository(context);
     }
 
