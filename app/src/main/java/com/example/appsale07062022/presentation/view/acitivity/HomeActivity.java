@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.appsale07062022.data.model.AppResource;
+import com.example.appsale07062022.data.model.Cart;
 import com.example.appsale07062022.data.model.Product;
 import com.example.appsale07062022.databinding.ActivityHomeBinding;
 import com.example.appsale07062022.presentation.view.adapter.ProductAdapter;
@@ -50,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void event() {
         homeViewModel.getProducts();
+        homeViewModel.getCart();
     }
 
     private void observerData() {
@@ -66,6 +68,24 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case ERROR:
                         Toast.makeText(HomeActivity.this, listAppResource.message, Toast.LENGTH_SHORT).show();
+                        setLoading(false);
+                        break;
+                }
+            }
+        });
+
+        homeViewModel.getResourceCart().observe(this, new Observer<AppResource<Cart>>() {
+            @Override
+            public void onChanged(AppResource<Cart> cartAppResource) {
+                switch (cartAppResource.status) {
+                    case SUCCESS:
+                        setLoading(false);
+                        break;
+                    case LOADING:
+                        setLoading(true);
+                        break;
+                    case ERROR:
+                        Toast.makeText(HomeActivity.this, cartAppResource.message, Toast.LENGTH_SHORT).show();
                         setLoading(false);
                         break;
                 }

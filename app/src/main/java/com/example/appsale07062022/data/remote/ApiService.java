@@ -1,6 +1,7 @@
 package com.example.appsale07062022.data.remote;
 
 import com.example.appsale07062022.data.remote.dto.AppResponse;
+import com.example.appsale07062022.data.remote.dto.CartDTO;
 import com.example.appsale07062022.data.remote.dto.ProductDTO;
 import com.example.appsale07062022.data.remote.dto.UserDTO;
 
@@ -25,4 +26,7 @@ public interface ApiService {
 
     @GET("product")
     Call<AppResponse<List<ProductDTO>>> getProducts();
+
+    @GET("cart")
+    Call<AppResponse<CartDTO>> getCart();
 }

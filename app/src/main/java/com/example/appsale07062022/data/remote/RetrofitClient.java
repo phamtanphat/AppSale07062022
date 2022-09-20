@@ -54,14 +54,13 @@ public class RetrofitClient {
                         String token = (String) AppCache.getInstance(context).getValue(AppConstant.TOKEN_KEY);
                         if (token != null && !token.isEmpty()) {
                             Request newRequest = chain.request().newBuilder()
-                                    .addHeader("Authorization", "Bearer" + token)
+                                    .addHeader("Authorization", "Bearer " + token)
                                     .build();
                             return chain.proceed(newRequest);
                         }
                         return chain.proceed(chain.request());
                     }
-                })
-                .build();
+                }).build();
         Gson gson = new GsonBuilder().create();
         return new Retrofit.Builder()
                 .baseUrl(AppConstant.BASE_URL)
