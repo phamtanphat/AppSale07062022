@@ -97,6 +97,55 @@ public class HomeViewModel extends ViewModel {
                 });
     }
 
+    public void addCart(String idProduct) {
+        resourceCart.setValue(new AppResource.Loading(null));
+        cartRepository.addCart(idProduct)
+                .enqueue(new Callback<AppResponse<CartDTO>>() {
+                    @Override
+                    public void onResponse(Call<AppResponse<CartDTO>> call, Response<AppResponse<CartDTO>> response) {
+                        if (response.isSuccessful()) {
+                            AppResponse<CartDTO> responseListProducts = response.body();
+                            CartDTO cartDTO = responseListProducts.data;
+                            List<Product> listProduct = new ArrayList<>();
+                            for (ProductDTO e : cartDTO.getProducts()) {
+                                listProduct.add(new Product(
+                                        e.getId(),
+                                        e.getName(),
+                                        e.getAddress(),
+                                        e.getPrice(),
+                                        e.getImg(),
+                                        e.getQuantity(),
+                                        e.getGallery())
+                                );
+                            }
+                            resourceCart.setValue(
+                                    new AppResource.Success<>(new Cart(
+                                            cartDTO.getId(),
+                                            listProduct,
+                                            cartDTO.getIdUser(),
+                                            cartDTO.getPrice())
+                                    )
+                            );
+                        } else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                                String message = jsonObject.getString("message");
+                                resourceCart.setValue(new AppResource.Error<>(message));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AppResponse<CartDTO>> call, Throwable t) {
+                        resourceListProducts.setValue(new AppResource.Error<>(t.getMessage()));
+                    }
+                });
+    }
+
     public void getProducts() {
         resourceListProducts.setValue(new AppResource.Loading(null));
         productRepository.getProducts()

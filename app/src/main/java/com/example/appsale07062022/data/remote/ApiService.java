@@ -29,4 +29,7 @@ public interface ApiService {
 
     @GET("cart")
     Call<AppResponse<CartDTO>> getCart();
+
+    @POST("cart/add")
+    Call<AppResponse<CartDTO>> addToCart(@Body HashMap<String, Object> body);
 }

@@ -2,6 +2,7 @@ package com.example.appsale07062022.presentation.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.FoodView
         public FoodViewHolder(@NonNull LayoutItemProductBinding view) {
             super(view.getRoot());
             binding = view;
+
+            binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickProduct != null) {
+                        onItemClickProduct.onClick(getAdapterPosition());
+                    }
+                }
+            });
         }
 
         public void bind(Context context, Product product) {
