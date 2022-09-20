@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:clipToPadding="false"
     android:focusable="true"
+    android:paddingEnd="5dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
